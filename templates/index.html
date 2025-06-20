@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÇLB Yapı - Mimarlık • Mühendislik • İnşaat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="ÇLB Yapı Logo" class="logo-img" style="height:48px; width:auto; margin-right:8px; vertical-align:middle;">
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link" data-section="home">Ana Sayfa</a>
+                <a href="#about" class="nav-link" data-section="about">Hakkımızda</a>
+                <a href="#services" class="nav-link" data-section="services">Hizmetlerimiz</a>
+                <a href="#portfolio" class="nav-link" data-section="portfolio">Projelerimiz</a>
+                <a href="#contact" class="nav-link" data-section="contact">İletişim</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>MİMARLIK • MÜHENDİSLİK • İNŞAAT</span>
+                </div>
+                <h1 class="hero-title">
+                    Tasarımdan Uygulamaya<br>
+                    <span class="highlight">Mükemmel Çözümler</span>
+                </h1>
+                <p class="hero-description">
+                    ÇLB Yapı olarak, mimarlık, mühendislik ve inşaat alanlarında entegre hizmet sunarak projelerinizi hayata geçiriyoruz.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="handleContactClick()">
+                        <span>Projeni Başlat</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-secondary" onclick="handlePortfolioClick()">
+                        <span>Projelerimizi İncele</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <svg id="arch-construction-anim" width="380" height="240" viewBox="0 0 380 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                  <!-- Blueprint/Architectural Drawing Line (straight, animated) -->
+                  <line x1="30" y1="200" x2="370" y2="200" stroke="#1976d2" stroke-width="2">
+                    <animate attributeName="stroke-dasharray" values="0,400;340,0;340,0;0,400" keyTimes="0;0.2;0.8;1" dur="2.5s" repeatCount="indefinite" />
+                  </line>
+                  <!-- Building 1: Height breathing -->
+                  <polyline id="b1" points="40,180 40,120 60,90 80,120 80,180" stroke="#1a237e" stroke-width="3" fill="none">
+                    <animate attributeName="points" values="40,180 40,130 60,100 80,130 80,180;40,180 40,120 60,90 80,120 80,180;40,180 40,130 60,100 80,130 80,180" dur="2.5s" repeatCount="indefinite" />
+                  </polyline>
+                  <!-- Windows for Building 1 -->
+                  <rect x="48" y="140" width="6" height="10" fill="none" stroke="#1a237e" stroke-width="1"/>
+                  <rect x="66" y="150" width="6" height="10" fill="none" stroke="#1a237e" stroke-width="1"/>
+                  <!-- Building 2: Top point waves -->
+                  <polyline id="b2" points="90,180 90,110 110,80 130,110 130,180" stroke="#3949ab" stroke-width="3" fill="none">
+                    <animate attributeName="points" values="90,180 90,120 110,90 130,120 130,180;90,180 90,110 110,80 130,110 130,180;90,180 90,120 110,90 130,120 130,180" dur="2.5s" begin="0.5s" repeatCount="indefinite" />
+                  </polyline>
+                  <!-- Windows for Building 2 -->
+                  <rect x="98" y="130" width="6" height="10" fill="none" stroke="#3949ab" stroke-width="1"/>
+                  <rect x="118" y="145" width="6" height="10" fill="none" stroke="#3949ab" stroke-width="1"/>
+                  <!-- Building 3: Height breathing (different phase) -->
+                  <polyline id="b3" points="140,180 140,100 160,70 180,100 180,180" stroke="#283593" stroke-width="3" fill="none">
+                    <animate attributeName="points" values="140,180 140,110 160,80 180,110 180,180;140,180 140,100 160,70 180,100 180,180;140,180 140,110 160,80 180,110 180,180" dur="2.5s" begin="1s" repeatCount="indefinite" />
+                  </polyline>
+                  <!-- Windows for Building 3 -->
+                  <rect x="148" y="120" width="6" height="10" fill="none" stroke="#283593" stroke-width="1"/>
+                  <rect x="168" y="135" width="6" height="10" fill="none" stroke="#283593" stroke-width="1"/>
+                  <!-- Building 4: Top point waves (different phase) -->
+                  <polyline id="b4" points="190,180 190,120 210,90 230,120 230,180" stroke="#5c6bc0" stroke-width="3" fill="none">
+                    <animate attributeName="points" values="190,180 190,130 210,100 230,130 230,180;190,180 190,120 210,90 230,120 230,180;190,180 190,130 210,100 230,130 230,180" dur="2.5s" begin="1.5s" repeatCount="indefinite" />
+                  </polyline>
+                  <!-- Windows for Building 4 -->
+                  <rect x="198" y="140" width="6" height="10" fill="none" stroke="#5c6bc0" stroke-width="1"/>
+                  <rect x="218" y="155" width="6" height="10" fill="none" stroke="#5c6bc0" stroke-width="1"/>
+                  <!-- Building 5: Height breathing (different phase) -->
+                  <polyline id="b5" points="240,180 240,110 260,80 280,110 280,180" stroke="#7986cb" stroke-width="3" fill="none">
+                    <animate attributeName="points" values="240,180 240,120 260,90 280,120 280,180;240,180 240,110 260,80 280,110 280,180;240,180 240,120 260,90 280,120 280,180" dur="2.5s" begin="2s" repeatCount="indefinite" />
+                  </polyline>
+                  <!-- Windows for Building 5 -->
+                  <rect x="248" y="130" width="6" height="10" fill="none" stroke="#7986cb" stroke-width="1"/>
+                  <rect x="268" y="145" width="6" height="10" fill="none" stroke="#7986cb" stroke-width="1"/>
+                  <!-- Trees (left, right, between buildings) -->
+                  <ellipse cx="30" cy="180" rx="6" ry="12" fill="#388e3c" stroke="#2e7d32" stroke-width="2"/>
+                  <rect x="28" y="180" width="4" height="12" fill="#6d4c41" stroke="#4e342e" stroke-width="1"/>
+                  <ellipse cx="290" cy="180" rx="6" ry="12" fill="#388e3c" stroke="#2e7d32" stroke-width="2"/>
+                  <rect x="288" y="180" width="4" height="12" fill="#6d4c41" stroke="#4e342e" stroke-width="1"/>
+                  <ellipse cx="115" cy="180" rx="4" ry="8" fill="#43a047" stroke="#2e7d32" stroke-width="1"/>
+                  <rect x="113" y="180" width="3" height="8" fill="#6d4c41" stroke="#4e342e" stroke-width="1"/>
+                  <!-- Human silhouettes (minimal stick figures) -->
+                  <circle cx="70" cy="190" r="3" fill="#333" />
+                  <line x1="70" y1="193" x2="70" y2="200" stroke="#333" stroke-width="1.5"/>
+                  <line x1="70" y1="195" x2="67" y2="198" stroke="#333" stroke-width="1"/>
+                  <line x1="70" y1="195" x2="73" y2="198" stroke="#333" stroke-width="1"/>
+                  <line x1="70" y1="200" x2="68" y2="205" stroke="#333" stroke-width="1"/>
+                  <line x1="70" y1="200" x2="72" y2="205" stroke="#333" stroke-width="1"/>
+                  <circle cx="210" cy="190" r="3" fill="#333" />
+                  <line x1="210" y1="193" x2="210" y2="200" stroke="#333" stroke-width="1.5"/>
+                  <line x1="210" y1="195" x2="207" y2="198" stroke="#333" stroke-width="1"/>
+                  <line x1="210" y1="195" x2="213" y2="198" stroke="#333" stroke-width="1"/>
+                  <line x1="210" y1="200" x2="208" y2="205" stroke="#333" stroke-width="1"/>
+                  <line x1="210" y1="200" x2="212" y2="205" stroke="#333" stroke-width="1"/>
+                  <!-- Crane Tower -->
+                  <rect x="300" y="80" width="6" height="100" fill="#f9a825" stroke="#333" stroke-width="2"/>
+                  <!-- Crane Boom -->
+                  <line x1="303" y1="80" x2="340" y2="40" stroke="#f9a825" stroke-width="4">
+                    <animate attributeName="x2" values="340;330;340" dur="2.5s" repeatCount="indefinite" />
+                    <animate attributeName="y2" values="40;70;40" dur="2.5s" repeatCount="indefinite" />
+                  </line>
+                  <!-- Crane Cable -->
+                  <line x1="330" y1="70" x2="330" y2="120" stroke="#f9a825" stroke-width="3">
+                    <animate attributeName="y2" values="120;160;120" dur="2.5s" repeatCount="indefinite" />
+                  </line>
+                  <!-- Ground Line -->
+                  <line x1="30" y1="180" x2="370" y2="180" stroke="#333" stroke-width="2"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Hizmetlerimiz</div>
+                <h2>Entegre Çözümler</h2>
+                <p>Mimarlık, mühendislik ve inşaat alanlarında profesyonel hizmetler</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-number">01</div>
+                    <div class="service-icon">
+                        <i class="fas fa-drafting-compass"></i>
+                    </div>
+                    <h3>Mimarlık Hizmetleri</h3>
+                    <p>Modern ve fonksiyonel mimari tasarımlar, konsept projeler ve detay projelendirme hizmetleri</p>
+                    <ul class="service-features">
+                        <li>Konsept Tasarım</li>
+                        <li>Mimari Projeler</li>
+                        <li>İç Mekan Tasarımı</li>
+                        <li>3D Görselleştirme</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-number">02</div>
+                    <div class="service-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Mühendislik Hizmetleri</h3>
+                    <p>Yapı, elektrik, makine ve çevre mühendisliği alanlarında uzman çözümler</p>
+                    <ul class="service-features">
+                        <li>Yapı Mühendisliği</li>
+                        <li>Elektrik Projeleri</li>
+                        <li>Makine Projeleri</li>
+                        <li>Zemin Etüdü</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-number">03</div>
+                    <div class="service-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3>İnşaat Hizmetleri</h3>
+                    <p>Konut, ticari ve endüstriyel yapıların inşaatı, renovasyon ve tadilat işleri</p>
+                    <ul class="service-features">
+                        <li>Konut İnşaatı</li>
+                        <li>Ticari Binalar</li>
+                        <li>Endüstriyel Yapılar</li>
+                        <li>Renovasyon</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="stat-label">Tamamlanan Proje</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Yıllık Deneyim</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number" data-target="300">0</div>
+                    <div class="stat-label">Mutlu Müşteri</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-number" data-target="25">0</div>
+                    <div class="stat-label">Uzman Personel</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <div class="section-header">
+                        <div class="section-badge">Hakkımızda</div>
+                        <h2>ÇLB Yapı Kimdir?</h2>
+                        <p>Mimarlık, mühendislik ve inşaat sektörlerinde kaliteli hizmet</p>
+                    </div>
+                    <div class="about-description">
+                        <p>ÇLB Yapı, mimarlık, mühendislik ve inşaat alanlarında entegre hizmet sunan uzman bir firmadır. Müşterilerimizin hayallerini gerçeğe dönüştürmek için yaratıcı tasarımlar ve mükemmel uygulamalar gerçekleştiriyoruz.</p>
+                        
+                        <p>Deneyimli ekibimiz ve modern teknolojimizle, her ölçekte projeye profesyonel yaklaşım sergileyerek sektörde güvenilir bir partner olmayı hedefliyoruz.</p>
+                    </div>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Profesyonel Ekip</h4>
+                                <p>Alanında uzman mimar ve mühendislerden oluşan deneyimli kadro</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Kalite Garantisi</h4>
+                                <p>Tüm projelerimizde yüksek kalite standartları ve güvenilir çözümler</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Zamanında Teslimat</h4>
+                                <p>Planlanan sürelerde tamamlanan projeler ve güvenilir hizmet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual" data-aos="fade-left">
+                    <div class="visual-container">
+                        <div class="visual-grid">
+                            <div class="grid-item grid-item-1">
+                                <i class="fas fa-drafting-compass"></i>
+                                <span>Mimarlık</span>
+                            </div>
+                            <div class="grid-item grid-item-2">
+                                <i class="fas fa-calculator"></i>
+                                <span>Mühendislik</span>
+                            </div>
+                            <div class="grid-item grid-item-3">
+                                <i class="fas fa-hammer"></i>
+                                <span>İnşaat</span>
+                            </div>
+                            <div class="grid-item grid-item-4">
+                                <div class="central-logo">ÇLB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Projelerimiz</div>
+                <h2>Başarılı Çalışmalar</h2>
+                <p>Gerçekleştirdiğimiz mimarlık, mühendislik ve inşaat projeleri</p>
+            </div>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Tümü</button>
+                <button class="filter-btn" data-filter="architecture">Mimarlık</button>
+                <button class="filter-btn" data-filter="engineering">Mühendislik</button>
+                <button class="filter-btn" data-filter="construction">İnşaat</button>
+            </div>
+            <div class="portfolio-grid" id="portfolio-grid">
+                <!-- Projects will be loaded dynamically from API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">İletişim</div>
+                <h2>Projeni Başlatalım</h2>
+                <p>Hayalinizdeki projeyi birlikte hayata geçirelim</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Adres</h3>
+                            <p>Kurtuluş Mahallesi Fatih Caddesi No:32, Kat 2 Daire: 4A, 45500 Soma/Manisa</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Telefon</h3>
+                            <p>+90 (546) 670 91 61</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>E-posta</h3>
+                            <p>iletisim@clbyapi.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Çalışma Saatleri</h3>
+                            <p>Pazartesi - Cuma: 09:00 - 18:00<br>Cumartesi: 09:00 - 15:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Ad Soyad" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="E-posta" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" placeholder="Telefon" required>
+                            </div>
+                            <div class="form-group">
+                                <select id="service" name="service" required>
+                                    <option value="">Hizmet Seçiniz</option>
+                                    <option value="architecture">Mimarlık Hizmetleri</option>
+                                    <option value="engineering">Mühendislik Hizmetleri</option>
+                                    <option value="construction">İnşaat Hizmetleri</option>
+                                    <option value="consultation">Danışmanlık</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Proje detaylarınızı bizimle paylaşın..." rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Mesaj Gönder</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-main">ÇLB</span>
+                        <span class="logo-sub">YAPI</span>
+                    </div>
+                    <p>Mimarlık, mühendislik ve inşaat alanlarında profesyonel hizmetler sunarak hayallerinizi gerçeğe dönüştürüyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Hizmetler</h3>
+                    <ul>
+                        <li><a href="#services">Mimarlık Hizmetleri</a></li>
+                        <li><a href="#services">Mühendislik Hizmetleri</a></li>
+                        <li><a href="#services">İnşaat Hizmetleri</a></li>
+                        <li><a href="#services">Proje Danışmanlığı</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kurumsal</h3>
+                    <ul>
+                        <li><a href="#about">Hakkımızda</a></li>
+                        <li><a href="#portfolio">Projelerimiz</a></li>
+                        <li><a href="#contact">İletişim</a></li>
+                        <li><a href="#">Referanslar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> +90 (212) 555 01 01</p>
+                        <p><i class="fas fa-envelope"></i> info@clbyapi.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ÇLB Yapı. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" onclick="handleBackToTop()" aria-label="Başa Dön">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> 

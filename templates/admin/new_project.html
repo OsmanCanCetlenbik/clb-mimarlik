@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÇLB Yapı - Yeni Proje Ekle</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-nav a.logout {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-nav a.logout:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .form-header {
+            padding: 2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            background: #f5f5f5;
+            color: #333;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .form-content {
+            padding: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 1rem;
+            border: 2px dashed #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: #1a237e;
+            background: #f8f9fa;
+        }
+
+        .file-upload-label i {
+            font-size: 2rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-upload-label p {
+            color: #666;
+            margin: 0;
+        }
+
+        .file-upload-label strong {
+            color: #1a237e;
+        }
+
+        .preview-image {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .preview-image img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+            color: white;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message {
+            color: #388e3c;
+            background: #e8f5e8;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <h1>ÇLB Yapı - Yeni Proje Ekle</h1>
+        <nav class="admin-nav">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/projects">Projeler</a>
+            <a href="/" target="_blank">Siteyi Görüntüle</a>
+            <a href="/admin/logout" class="logout">Çıkış Yap</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Yeni Proje Ekle</h2>
+                <a href="/admin/projects" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Geri Dön
+                </a>
+            </div>
+
+            <div class="form-content">
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+
+                <form id="projectForm" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="title">Proje Adı *</label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Kategori *</label>
+                            <select id="category" name="category" required>
+                                <option value="">Kategori Seçin</option>
+                                <option value="architecture">Mimarlık</option>
+                                <option value="engineering">Mühendislik</option>
+                                <option value="construction">İnşaat</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="client">Müşteri</label>
+                            <input type="text" id="client" name="client">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Konum</label>
+                            <input type="text" id="location" name="location">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="completion_date">Tamamlanma Tarihi</label>
+                            <input type="date" id="completion_date" name="completion_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Durum</label>
+                            <select id="status" name="status">
+                                <option value="completed">Tamamlandı</option>
+                                <option value="ongoing">Devam Ediyor</option>
+                                <option value="planned">Planlandı</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="description">Proje Açıklaması *</label>
+                        <textarea id="description" name="description" required placeholder="Proje detaylarını buraya yazın..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Proje Görseli</label>
+                        <div class="file-upload">
+                            <input type="file" id="image" name="image" accept="image/*">
+                            <label for="image" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p><strong>Dosya Seç</strong> veya sürükleyip bırak</p>
+                                <p>PNG, JPG, JPEG (Max: 16MB)</p>
+                            </label>
+                        </div>
+                        <div class="preview-image" id="previewImage" style="display: none;">
+                            <img id="imagePreview" src="" alt="Önizleme">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/admin/projects" class="btn btn-secondary">İptal</a>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span>Proje Ekle</span>
+                            <span class="loading" id="loading">
+                                <i class="fas fa-spinner"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image preview
+        document.getElementById('image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('imagePreview');
+            const previewContainer = document.getElementById('previewImage');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+            }
+        });
+
+        // Form submission
+        document.getElementById('projectForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Reset messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            // Show loading
+            submitBtn.disabled = true;
+            loading.style.display = 'inline-block';
+            
+            try {
+                const response = await fetch('/admin/projects/new', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    successMessage.textContent = data.message;
+                    successMessage.style.display = 'block';
+                    
+                    // Reset form
+                    this.reset();
+                    document.getElementById('previewImage').style.display = 'none';
+                    
+                    setTimeout(() => {
+                        window.location.href = '/admin/projects';
+                    }, 2000);
+                } else {
+                    errorMessage.textContent = data.message;
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                errorMessage.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+                errorMessage.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+
+        // Drag and drop functionality
+        const fileUpload = document.querySelector('.file-upload');
+        const fileUploadLabel = document.querySelector('.file-upload-label');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileUpload.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileUpload.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileUpload.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            fileUploadLabel.style.borderColor = '#1a237e';
+            fileUploadLabel.style.background = '#f8f9fa';
+        }
+
+        function unhighlight(e) {
+            fileUploadLabel.style.borderColor = '#e0e0e0';
+            fileUploadLabel.style.background = 'white';
+        }
+
+        fileUpload.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                document.getElementById('image').files = files;
+                const event = new Event('change');
+                document.getElementById('image').dispatchEvent(event);
+            }
+        }
+    </script>
+</body>
+</html> 

@@ -254,12 +254,12 @@ def init_db():
     if not admin:
         admin = Admin(
             username='admin',
-            password_hash=generate_password_hash('admin123'),
+            password_hash=generate_password_hash('CLB2024Secure!'),
             email='admin@clbyapi.com'
         )
         db.session.add(admin)
         db.session.commit()
-        print('Default admin user created: admin/admin123')
+        print('Default admin user created: admin/CLB2024Secure!')
 
 if __name__ == '__main__':
     with app.app_context():
@@ -270,12 +270,12 @@ if __name__ == '__main__':
         if not admin:
             admin = Admin(
                 username='admin',
-                password_hash=generate_password_hash('admin123'),
+                password_hash=generate_password_hash('CLB2024Secure!'),
                 email='admin@clbyapi.com'
             )
             db.session.add(admin)
             db.session.commit()
-            print('Default admin user created: admin/admin123')
+            print('Default admin user created: admin/CLB2024Secure!')
     
     # Development server
     app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5001))) 
